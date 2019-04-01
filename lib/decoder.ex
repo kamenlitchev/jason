@@ -603,10 +603,10 @@ defmodule Jason.Decoder do
   end
 
   defp try_parse_float(string, token, skip) do
-    :erlang.binary_to_float(string)
-  catch
-    :error, :badarg ->
-      token_error(token, skip)
+    case Decimal.parse(string) do
+      {:ok, decimal} -> decimal
+      _ -> token_error(token, skip)
+    end
   end
 
   defp error(<<_rest::bits>>, _original, skip, _stack, _key_decode, _string_decode) do
