@@ -53,10 +53,10 @@ Then you can use the module, by passing it to `Postgrex.start_link`.
 ### Ecto
 
 To replicate fully the current behaviour of `Poison` when used in Ecto applications,
-you need to configure `Jason` to be the default encoder in `config/config.exs`:
+you need to configure `Jason` to be the default encoder of the `postgrex` library, in `config/config.exs`:
 
 ```elixir
-config :ecto, json_library: Jason
+config :postgrex, :json_library, Jason
 ```
 
 Additionally, when using PostgreSQL, you need to define a custom types module as described
@@ -116,8 +116,8 @@ http://michal.muskala.eu/jason/decode.html and http://michal.muskala.eu/jason/en
 
 ### Running
 
-Benchmarks against most popular Elixir & Erlang json libraries can be executed
-with `mix bench.encode` and `mix bench.decode`.
+Benchmarks against most popular Elixir & Erlang json libraries can be executed after
+going into the `bench/` folder and then executing `mix bench.encode` and `mix bench.decode`.
 A HTML report of the benchmarks (after their execution) can be found in
 `bench/output/encode.html` and `bench/output/decode.html` respectively.
 
